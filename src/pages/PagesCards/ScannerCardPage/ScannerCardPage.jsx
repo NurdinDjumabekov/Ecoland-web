@@ -1,7 +1,7 @@
 /////// hooks
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 /////// style
 import './style.scss';
@@ -9,14 +9,15 @@ import './style.scss';
 /////// components
 import { Html5Qrcode } from 'html5-qrcode';
 import NavMenu from '../../../common/NavMenu/NavMenu';
-import { getBonusCard } from '../../../store/reducers/requestSlice';
 
-const ScannerAddBonusPage = () => {
+///// fns
+import { dataCardFN } from '../../../store/reducers/stateSlice';
+
+const ScannerCardPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const { invoice_guid } = location.state;
+  const { dataCard } = useSelector((state) => state.stateSlice);
 
   const [start, setStart] = useState(true);
 
@@ -40,9 +41,8 @@ const ScannerAddBonusPage = () => {
       setStart(false);
       navigator.vibrate(200); // Вибрация при успешном сканировании
       ////// получаю данные бонусной карты
-      dispatch(
-        getBonusCard({ navigate, card_bonus: decodedText, invoice_guid })
-      );
+      dispatch(dataCardFN({ ...dataCard, card: decodedText }));
+      navigate('/card/add');
     };
 
     if (start) {
@@ -66,4 +66,4 @@ const ScannerAddBonusPage = () => {
   );
 };
 
-export default ScannerAddBonusPage;
+export default ScannerCardPage;

@@ -1,24 +1,24 @@
 ////// hooks
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 ////// components
-import { AllHistoryInvoice } from "../../../common/AllHistoryInvoice/AllHistoryInvoice";
+import { AllHistoryInvoice } from '../../../common/AllHistoryInvoice/AllHistoryInvoice';
 
 ////// fns
-import { createInvoiceTT } from "../../../store/reducers/requestSlice";
-import { getListSoldInvoice } from "../../../store/reducers/requestSlice";
-import { clearSaleDiscountFN } from "../../../store/reducers/stateSlice";
-import { saleDiscountFN } from "../../../store/reducers/stateSlice";
+import { createInvoiceTT } from '../../../store/reducers/requestSlice';
+import { getListSoldInvoice } from '../../../store/reducers/requestSlice';
+import { clearSaleDiscountFN } from '../../../store/reducers/stateSlice';
+import { saleDiscountFN } from '../../../store/reducers/stateSlice';
 
 ////// style
-import "./style.scss";
+import './style.scss';
 
 ////// imgs
-import card from "../../../assets/images/card.png";
-import sale from "../../../assets/images/sale.png";
-import { useNavigate } from "react-router-dom";
-import NavMenu from "../../../common/NavMenu/NavMenu";
+import card from '../../../assets/images/card.png';
+import sale from '../../../assets/images/sale.png';
+import { useNavigate } from 'react-router-dom';
+import NavMenu from '../../../common/NavMenu/NavMenu';
 
 const MainSalePage = () => {
   const dispatch = useDispatch();
@@ -38,12 +38,12 @@ const MainSalePage = () => {
     //// СОЗДАНИ НАКЛАДНОЙ ДЛЯ ПРОДАЖИ
   };
 
-  const addInfoCards = () => navigate("/card/add");
+  const addInfoCards = () => navigate('/card/add');
   //// перенаправляю на страницу добавления карты
 
   return (
     <>
-      <NavMenu navText={"Продажи"} />
+      <NavMenu navText={'Продажи'} />
       <div className="listSoldsProd">
         <div className="saleActionBlock">
           <button className="saleBlock" onClick={saleProd}>
@@ -63,9 +63,10 @@ const MainSalePage = () => {
             <>
               {listSoldInvoice?.map((item, index) => (
                 <AllHistoryInvoice
+                  key={item?.guid}
                   item={item}
                   index={index}
-                  keyLink={"/sale/history"}
+                  keyLink={'/sale/history'}
                 />
               ))}
             </>

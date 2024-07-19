@@ -1,21 +1,21 @@
 //// hooks
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 //// redux
-import { getListSoldProd } from "../../../store/reducers/requestSlice";
-import { changeInfoKassaSale } from "../../../store/reducers/requestSlice";
+import { getListSoldProd } from '../../../store/reducers/requestSlice';
+import { changeInfoKassaSale } from '../../../store/reducers/requestSlice';
 
 //// helpers
-import { formatCount, sumSoputkaProds } from "../../../helpers/amounts";
+import { formatCount, sumSoputkaProds } from '../../../helpers/amounts';
 
 /////components
-import NavMenu from "../../../common/NavMenu/NavMenu";
-import ResultCounts from "../../../common/ResultCounts/ResultCounts";
+import NavMenu from '../../../common/NavMenu/NavMenu';
+import ResultCounts from '../../../common/ResultCounts/ResultCounts';
 
 //// style
-import "./style.scss";
+import './style.scss';
 
 const SoldProdHistoryPage = () => {
   //// история каждой накладной продажи, история продаж
@@ -36,13 +36,13 @@ const SoldProdHistoryPage = () => {
 
   const confirmSale = () => {
     ///// перехожу на страницу добавления товара в накладную продажи
-    navigate("/sale/sold_prod", { state: { invoice_guid: guidInvoice } }); /// check
+    navigate('/sale/sold_prod', { state: { invoice_guid: guidInvoice } }); /// check
   };
 
   const addTovar = () => {
     ///// перехожу на страницу подтверждения продажи
-    navigate("/sale/kassa", { state: { invoice_guid: guidInvoice } });
-    dispatch(changeInfoKassaSale({ guid: guidInvoice, codeid: "" }));
+    navigate('/sale/kassa', { state: { invoice_guid: guidInvoice } });
+    dispatch(changeInfoKassaSale({ guid: guidInvoice, codeid: '' }));
     //// заренее подставляю guid накладной куда надо добавить товары
   };
 
@@ -52,12 +52,12 @@ const SoldProdHistoryPage = () => {
       <div className="containerHistorySold">
         <div className="historyParent">
           {listSoldProd?.list?.map((item, index) => (
-            <div className="everyInner">
+            <div className="everyInner" key={item?.guid}>
               <div className="mainData">
                 <div className="mainDataInner">
                   <p className="titleNum">{index + 1}</p>
                   <p className="sum">
-                    {item?.sale_price} сом х {item?.count} {item?.unit} ={" "}
+                    {item?.sale_price} сом х {item?.count} {item?.unit} ={' '}
                     {formatCount(item?.total_soputka)} сом
                   </p>
                 </div>

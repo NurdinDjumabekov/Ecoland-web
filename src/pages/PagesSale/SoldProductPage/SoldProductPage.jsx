@@ -1,23 +1,23 @@
 ////// hooks
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 /////// fns
-import { getListSoldProd } from "../../../store/reducers/requestSlice";
-import { endSaleProds } from "../../../store/reducers/requestSlice";
-import { deleteSoldProd } from "../../../store/reducers/requestSlice";
+import { getListSoldProd } from '../../../store/reducers/requestSlice';
+import { endSaleProds } from '../../../store/reducers/requestSlice';
+import { deleteSoldProd } from '../../../store/reducers/requestSlice';
 
 ////// components
-import NavMenu from "../../../common/NavMenu/NavMenu";
-import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
-import Krest from "../../../common/Krest/Krest";
+import NavMenu from '../../../common/NavMenu/NavMenu';
+import ConfirmationModal from '../../../common/ConfirmationModal/ConfirmationModal';
+import Krest from '../../../common/Krest/Krest';
 
 ////// helpers
-import { formatCount, sumSaleProds } from "../../../helpers/amounts";
+import { formatCount, sumSaleProds } from '../../../helpers/amounts';
 
 ////style
-import "./style.scss";
+import './style.scss';
 
 const SoldProductPage = () => {
   //// список проданных продуктов
@@ -51,7 +51,7 @@ const SoldProductPage = () => {
   };
 
   const navCard = () => {
-    navigate("/card/add_bonus", { invoice_guid });
+    navigate('/card/add_bonus', { state: { invoice_guid } });
   };
 
   const sumProds = formatCount(sumSaleProds(listSoldProd?.list));
@@ -61,7 +61,7 @@ const SoldProductPage = () => {
   if (!listSoldProd?.list) {
     return (
       <>
-        <NavMenu navText={"Список продаж"} />
+        <NavMenu navText={'Список продаж'} />
         <p className="noneData">Список пустой</p>
       </>
     );
@@ -69,18 +69,18 @@ const SoldProductPage = () => {
 
   return (
     <>
-      <NavMenu navText={"Список продаж"} />
+      <NavMenu navText={'Список продаж'} />
       <div className="soldBlock">
         <div className="soldBlock">
           {listSoldProd?.list?.map((item, index) => (
-            <div className="container">
+            <div className="container" key={item?.guid}>
               <div className="parentBlock">
                 <div className="mainData">
                   <p className="indexNums">{index + 1} </p>
                   <div>
-                    <p className="titleDate">{item.date || "..."}</p>
+                    <p className="titleDate">{item.date || '...'}</p>
                     <p className="totalPrice">
-                      {item?.product_price} сом х {item?.count} {item?.unit} ={" "}
+                      {item?.product_price} сом х {item?.count} {item?.unit} ={' '}
                       {formatCount(+item?.total)} сом
                     </p>
                   </div>

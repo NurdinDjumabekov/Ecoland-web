@@ -1,33 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  dataLogin: { login: "", password: "" },
+  dataLogin: { login: '', password: '' },
 
-  temporaryData: { price: "", ves: "", guid: "" },
+  temporaryData: { price: '', ves: '', guid: '' },
   // временные данные для добавление товаров в сопутку, возврат и продажу
 
-  activeSelectCategory: "",
+  activeSelectCategory: '',
   /// хранение активной категории, для сортировки товаров(храню guid категории)
 
-  activeSelectWorkShop: "",
+  activeSelectWorkShop: '',
   /// хранение активного Цеха для сортировки категорий(храню guid Цеха)
 
-  searchProd: "", /// для текста поиска продуктов
+  searchProd: '', /// для текста поиска продуктов
 
-  dataCard: { fio: "", phone: "", card: "" }, //// для заолнения данных карты к привязке
+  dataCard: { fio: '', phone: '', card: '' }, //// для заолнения данных карты к привязке
 
-  saleDiscount: { bonuse: 0, user_guid: 0, fio: "" }, //// данные для бонусов
+  saleDiscount: { bonuse: 0, user_guid: 0, fio: '' }, //// данные для бонусов
 };
 
 const stateSlice = createSlice({
-  name: "stateSlice",
+  name: 'stateSlice',
   initialState,
   reducers: {
     changeDataLogin: (state, action) => {
       state.dataLogin = action.payload;
     },
     clearLogin: (state) => {
-      state.dataLogin = { login: "", password: "" };
+      state.dataLogin = { login: '', password: '' };
     },
 
     changeTemporaryData: (state, action) => {
@@ -35,7 +35,7 @@ const stateSlice = createSlice({
     },
 
     clearTemporaryData: (state, action) => {
-      state.temporaryData = { price: "", ves: "", guid: "" };
+      state.temporaryData = { price: '', ves: '', guid: '' };
     },
 
     changeActiveSelectCategory: (state, action) => {
@@ -59,7 +59,7 @@ const stateSlice = createSlice({
     },
 
     clearSaleDiscountFN: (state, action) => {
-      state.saleDiscount = { bonuse: 0, user_guid: 0, fio: "" };
+      state.saleDiscount = { bonuse: 0, user_guid: 0, fio: '' };
     },
   },
 });

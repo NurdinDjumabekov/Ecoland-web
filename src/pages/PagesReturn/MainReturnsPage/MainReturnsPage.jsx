@@ -1,16 +1,16 @@
 ////// hooks
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 ////// components
-import { AllHistoryInvoice } from "../../../common/AllHistoryInvoice/AllHistoryInvoice";
+import { AllHistoryInvoice } from '../../../common/AllHistoryInvoice/AllHistoryInvoice';
 
 ////// fns
-import { getMyReturnInvoice } from "../../../store/reducers/requestSlice";
+import { getMyReturnInvoice } from '../../../store/reducers/requestSlice';
 
 ////style
-import "./style.scss";
-import NavMenu from "../../../common/NavMenu/NavMenu";
+import './style.scss';
+import NavMenu from '../../../common/NavMenu/NavMenu';
 
 const MainReturnsPage = () => {
   const dispatch = useDispatch();
@@ -25,18 +25,18 @@ const MainReturnsPage = () => {
     getData();
   }, []);
 
-  console.log(listMyInvoiceReturn, "listMyInvoiceReturn");
+  // console.log(listMyInvoiceReturn, "listMyInvoiceReturn");
 
   return (
     <>
-      <NavMenu navText={"Возврат товара"} />
+      <NavMenu navText={'Возврат товара'} />
       <div className="returnMain">
         {listMyInvoiceReturn?.map((item, index) => (
           <AllHistoryInvoice
             key={item.guid}
             item={item}
             index={index}
-            keyLink={"/return/every"}
+            keyLink={'/return/every'}
           />
         ))}
       </div>

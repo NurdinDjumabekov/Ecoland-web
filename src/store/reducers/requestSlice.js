@@ -1,25 +1,25 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { API } from "../../env";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { API } from '../../env';
 
 ////// fns
-import { changeActiveSelectCategory, clearSaleDiscountFN } from "./stateSlice";
-import { changeActiveSelectWorkShop } from "./stateSlice";
-import { clearLogin } from "./stateSlice";
-import { clearTemporaryData } from "./stateSlice";
-import { changeLocalData } from "./saveDataSlice";
+import { changeActiveSelectCategory, clearSaleDiscountFN } from './stateSlice';
+import { changeActiveSelectWorkShop } from './stateSlice';
+import { clearLogin } from './stateSlice';
+import { clearTemporaryData } from './stateSlice';
+import { changeLocalData } from './saveDataSlice';
 
 ////// helpers
-import { upsText } from "../../helpers/Data";
+import { upsText } from '../../helpers/Data';
 
 /// logInAccount
 export const logInAccount = createAsyncThunk(
-  "logInAccount",
+  'logInAccount',
   async function (props, { dispatch, rejectWithValue }) {
     const { dataLogin, navigate, data } = props;
     try {
       const response = await axios({
-        method: "POST",
+        method: 'POST',
         url: `${API}/tt/login`,
         data: dataLogin,
       });
@@ -32,7 +32,7 @@ export const logInAccount = createAsyncThunk(
           dispatch(changeLocalData(obj));
 
           if (seller_guid) {
-            navigate("/");
+            navigate('/');
             dispatch(clearLogin());
           }
         }
@@ -51,7 +51,7 @@ export const logInAccount = createAsyncThunk(
 /// getWorkShopsGorSale
 /// get все цеха
 export const getWorkShopsGorSale = createAsyncThunk(
-  "getWorkShopsGorSale",
+  'getWorkShopsGorSale',
   async function (props, { dispatch, rejectWithValue }) {
     const { seller_guid } = props;
 
@@ -78,7 +78,7 @@ export const getWorkShopsGorSale = createAsyncThunk(
 
 /// getCategoryTT
 export const getCategoryTT = createAsyncThunk(
-  "getCategoryTT",
+  'getCategoryTT',
   /// для получения катеогрий товаров ТТ
   async function (props, { dispatch, rejectWithValue }) {
     const { location, seller_guid, type, workshop_guid } = props;
@@ -89,18 +89,18 @@ export const getCategoryTT = createAsyncThunk(
     try {
       const response = await axios(urlLink);
       if (response.status >= 200 && response.status < 300) {
-        const category_guid = response.data?.[0]?.category_guid || "";
+        const category_guid = response.data?.[0]?.category_guid || '';
         dispatch(changeActiveSelectCategory(category_guid)); /// исользую в продаже и в остатках
 
         // console.log(workshop_guid, "workshop_guid");
 
-        if (type === "leftovers") {
+        if (type === 'leftovers') {
           if (category_guid) {
             const obj = { seller_guid, category_guid, workshop_guid };
             dispatch(getMyLeftovers(obj));
             //// для страницы остатков вызываю первую категорию
           }
-        } else if (type === "sale") {
+        } else if (type === 'sale') {
           if (category_guid) {
             ////// для продажи и с0путки
             const sedData = { guid: category_guid, seller_guid, location };
@@ -121,7 +121,7 @@ export const getCategoryTT = createAsyncThunk(
 
 /// getProductTT
 export const getProductTT = createAsyncThunk(
-  "getProductTT",
+  'getProductTT',
   /// для получения продуктов
   async function (props, { dispatch, rejectWithValue }) {
     const { guid, seller_guid, location, workshop_guid } = props;
@@ -144,7 +144,7 @@ export const getProductTT = createAsyncThunk(
 /// searchProdSale
 ///// для поиска товаров только в продаже!
 export const searchProdSale = createAsyncThunk(
-  "searchProdSale",
+  'searchProdSale',
   /// для поиска товаров
   async function (props, { dispatch, rejectWithValue }) {
     const { text, seller_guid } = props;
@@ -165,15 +165,15 @@ export const searchProdSale = createAsyncThunk(
 
 /// getMyLeftovers
 export const getMyLeftovers = createAsyncThunk(
-  "getMyLeftovers",
+  'getMyLeftovers',
   async function (props, { dispatch, rejectWithValue }) {
     const { seller_guid, category_guid, workshop_guid } = props;
 
-    console.log(category_guid, "category_guid");
+    // console.log(category_guid, 'category_guid');
 
     try {
       const response = await axios({
-        method: "GET",
+        method: 'GET',
         url: `${API}/tt/get_report_leftovers?seller_guid=${seller_guid}&categ_guid=${category_guid}&workshop_guid=${workshop_guid}`,
       });
       if (response.status >= 200 && response.status < 300) {
@@ -189,17 +189,17 @@ export const getMyLeftovers = createAsyncThunk(
 
 /// createInvoiceTT
 export const createInvoiceTT = createAsyncThunk(
-  "createInvoiceTT",
+  'createInvoiceTT',
   /// (открытие кассы) создание накладной торговый точкой на целый день
   async function ({ seller_guid, navigate }, { dispatch, rejectWithValue }) {
     try {
       const response = await axios({
-        method: "POST",
+        method: 'POST',
         url: `${API}/tt/create_invoice`,
         data: { seller_guid },
       });
       if (response.status >= 200 && response.status < 300) {
-        navigate("/sale/kassa", {
+        navigate('/sale/kassa', {
           state: { invoice_guid: response?.data?.guid },
         });
         //// перенаправляю на страницу продажи с guid накладной, куда нуэно записать нынешние продажи
@@ -218,21 +218,21 @@ export const createInvoiceTT = createAsyncThunk(
 
 /// endSaleProds
 export const endSaleProds = createAsyncThunk(
-  "endSaleProds",
+  'endSaleProds',
   /// завершение продажи
   async function (props, { dispatch, rejectWithValue }) {
     const { invoice_guid, navigate, user_guid, bonuse } = props;
 
     try {
       const response = await axios({
-        method: "POST",
+        method: 'POST',
         url: `${API}/tt/point_sale_confirm`,
         data: { invoice_guid, user_guid, bonuse },
       });
 
       if (response.status >= 200 && response.status < 300) {
         if (response?.data?.result == 1) {
-          navigate("/");
+          navigate('/');
         }
 
         return response.data.result;
@@ -247,7 +247,7 @@ export const endSaleProds = createAsyncThunk(
 
 /// getBonusCard
 export const getBonusCard = createAsyncThunk(
-  "getBonusCard",
+  'getBonusCard',
   /// завершение продажи
   async function (props, { dispatch, rejectWithValue }) {
     const { card_bonus, navigate, invoice_guid } = props;
@@ -259,11 +259,11 @@ export const getBonusCard = createAsyncThunk(
         const obj = { ...response.data, invoice_guid };
 
         if (obj?.result == 1) {
-          navigate("AddBonusScreen", { obj });
+          navigate('/card/add_bonus_sale', { state: { obj } });
         } else if (obj?.result == 0) {
-          alert("Карта с таким номером не существует!");
+          alert('Карта с таким номером не существует!');
         } else if (+obj?.result === -1) {
-          alert("Эта карта не пренодлежит никакому клиенту!");
+          alert('Эта карта не пренодлежит никакому клиенту!');
         }
 
         return response.data;
@@ -279,13 +279,13 @@ export const getBonusCard = createAsyncThunk(
 /// getEveryProd
 export const getEveryProd = createAsyncThunk(
   /// получаю каждый продукт по qrcode или guid для продажи
-  "getEveryProd",
+  'getEveryProd',
   async function (props, { dispatch, rejectWithValue }) {
     const { guid, seller_guid, qrcode, navigate } = props;
     const { invoice_guid, closeModal } = props;
 
-    const urlGuid = !!guid ? `&product_guid=${guid}` : "";
-    const qrcodeGuid = !!qrcode ? `&qrcode=${qrcode}` : "";
+    const urlGuid = !!guid ? `&product_guid=${guid}` : '';
+    const qrcodeGuid = !!qrcode ? `&qrcode=${qrcode}` : '';
 
     const url = `${API}/tt/get_product_detail?seller_guid=${seller_guid}${urlGuid}${qrcodeGuid}`;
 
@@ -293,14 +293,14 @@ export const getEveryProd = createAsyncThunk(
       const response = await axios(url);
       if (response.status >= 200 && response.status < 300) {
         if (response?.data?.length === 0) {
-          await navigate("/sale/kassa", { state: { invoice_guid } });
-          alert("Не удалось найти такой продукт");
+          await navigate('/sale/kassa', { state: { invoice_guid } });
+          alert('Не удалось найти такой продукт');
         } else {
           const { guid, product_name } = response?.data?.[0];
           const obj = { guid, product_name, invoice_guid };
           if (!!qrcode) {
-            await navigate("/sale/kassa", { state: { invoice_guid } });
-            await navigate("/sale/every_prod", { state: { obj } });
+            await navigate('/sale/kassa', { state: { invoice_guid } });
+            await navigate('/sale/every_prod', { state: { obj } });
             ///// закрываю модалку для ввода ручного qr кода
             closeModal();
           }
@@ -319,13 +319,13 @@ export const getEveryProd = createAsyncThunk(
 /// addProductInvoiceTT
 export const addProductInvoiceTT = createAsyncThunk(
   /// добавление продукта(по одному) в накладную торговой точки
-  "addProductInvoiceTT",
+  'addProductInvoiceTT',
   async function (props, { dispatch, rejectWithValue }) {
     const { data, navigate, count_type } = props;
 
     try {
       const url = `${API}/tt/create_invoice_product`;
-      const response = await axios({ method: "POST", url, data });
+      const response = await axios({ method: 'POST', url, data });
 
       if (response.status >= 200 && response.status < 300) {
         const { result } = response?.data;
@@ -371,16 +371,16 @@ export const addProductInvoiceTT = createAsyncThunk(
 //// TieCardWithUser
 export const TieCardWithUser = createAsyncThunk(
   ///// привязка карты к пользователю
-  "TieCardWithUser",
+  'TieCardWithUser',
   async function (props, { dispatch, rejectWithValue }) {
     const { dataSend, navigate } = props;
     try {
       const url = `${API}/tt/create_client/`;
-      const response = await axios({ method: "POST", url, data: dataSend });
+      const response = await axios({ method: 'POST', url, data: dataSend });
       if (response.status >= 200 && response.status < 300) {
         if (response?.data?.result == 1 || response?.data?.result == 0) {
-          console.log(response?.data, "response?.data");
-          navigate("/");
+          console.log(response?.data, 'response?.data');
+          navigate('/');
         }
 
         return { result: response?.data?.result };
@@ -396,7 +396,7 @@ export const TieCardWithUser = createAsyncThunk(
 //// getListSoldInvoice
 export const getListSoldInvoice = createAsyncThunk(
   /// список проданных товаров
-  "getListSoldInvoice",
+  'getListSoldInvoice',
   async function (seller_guid, { dispatch, rejectWithValue }) {
     try {
       const url = `${API}/tt/get_point_invoice?seller_guid=${seller_guid}`;
@@ -415,13 +415,13 @@ export const getListSoldInvoice = createAsyncThunk(
 //// getListSoldProd
 export const getListSoldProd = createAsyncThunk(
   /// список проданных товаров
-  "getListSoldProd",
+  'getListSoldProd',
   async function (invoice_guid, { dispatch, rejectWithValue }) {
     try {
       const url = `${API}/tt/get_point_invoice_product?invoice_guid=${invoice_guid}`;
       const response = await axios(url);
       if (response.status >= 200 && response.status < 300) {
-        console.log(response?.data, "asdasd32");
+        console.log(response?.data, 'asdasd32');
         return response?.data?.[0];
       } else {
         throw Error(`Error: ${response.status}`);
@@ -435,13 +435,13 @@ export const getListSoldProd = createAsyncThunk(
 //// deleteSoldProd
 export const deleteSoldProd = createAsyncThunk(
   /// удаление данных из списока проданных товаров
-  "deleteSoldProd",
+  'deleteSoldProd',
   async function (props, { dispatch, rejectWithValue }) {
     const { product_guid, getData } = props;
 
     try {
       const response = await axios({
-        method: "POST",
+        method: 'POST',
         url: `${API}/tt/del_product`,
         data: { product_guid },
       });
@@ -463,12 +463,12 @@ export const deleteSoldProd = createAsyncThunk(
 
 /// getMyReturnInvoice
 export const getMyReturnInvoice = createAsyncThunk(
-  "getMyReturnInvoice",
+  'getMyReturnInvoice',
   /// для получения всех накладных воврата
   async function (seller_guid, { dispatch, rejectWithValue }) {
     try {
       const response = await axios({
-        method: "GET",
+        method: 'GET',
         url: `${API}/tt/get_invoice_return?seller_guid=${seller_guid}`,
       });
       if (response.status >= 200 && response.status < 300) {
@@ -484,7 +484,7 @@ export const getMyReturnInvoice = createAsyncThunk(
 
 /// getMyEveryInvoiceReturn
 export const getMyEveryInvoiceReturn = createAsyncThunk(
-  "getMyEveryInvoiceReturn",
+  'getMyEveryInvoiceReturn',
   /// для получения каждой накладной со списком товаров для возарата товара
   async function (guid, { dispatch, rejectWithValue }) {
     try {
@@ -503,7 +503,7 @@ export const getMyEveryInvoiceReturn = createAsyncThunk(
 
 /// acceptInvoiceReturn
 export const acceptInvoiceReturn = createAsyncThunk(
-  "acceptInvoiceReturn",
+  'acceptInvoiceReturn',
   /// для принятия накладной возврата торговой точкой
   async function (props, { rejectWithValue }) {
     const { seller_guid, listReturn, navigate } = props;
@@ -512,14 +512,14 @@ export const acceptInvoiceReturn = createAsyncThunk(
     console.log(seller_guid, listReturn, invoice_guid);
     try {
       const response = await axios({
-        method: "POST",
+        method: 'POST',
         url: `${API}/tt/confirm_invoice_return`,
         data: { seller_guid, listReturn, invoice_guid },
       });
 
       if (response.status >= 200 && response.status < 300) {
         if (response.data.status == 1) {
-          navigate("/");
+          navigate('/');
         }
         return response.data.status;
       } else {
@@ -533,7 +533,7 @@ export const acceptInvoiceReturn = createAsyncThunk(
 
 const initialState = {
   preloader: false,
-  chech: "",
+  chech: '',
 
   listWorkShopSale: [], //// список цехов для продаж
   listCategory: [], //  список категорий ТА
@@ -547,7 +547,7 @@ const initialState = {
 
   listProdSearch: [], /// храню данные поиска в продаже товара
 
-  infoKassa: { guid: "", codeid: "" }, /// guid каждой накладной ТТ
+  infoKassa: { guid: '', codeid: '' }, /// guid каждой накладной ТТ
 
   listActionLeftovers: [], // список остатков (переделанный мною) для возврата накладной и ревизии
 
@@ -557,7 +557,7 @@ const initialState = {
 };
 
 const requestSlice = createSlice({
-  name: "requestSlice",
+  name: 'requestSlice',
   initialState,
   extraReducers: (builder) => {
     //// logInAccount
@@ -567,7 +567,7 @@ const requestSlice = createSlice({
     builder.addCase(logInAccount.rejected, (state, action) => {
       state.error = action.payload;
       state.preloader = false;
-      alert("Неверный логин или пароль");
+      alert('Неверный логин или пароль');
     });
     builder.addCase(logInAccount.pending, (state, action) => {
       state.preloader = true;
@@ -585,7 +585,7 @@ const requestSlice = createSlice({
     });
     builder.addCase(getWorkShopsGorSale.rejected, (state, action) => {
       state.error = action.payload;
-      alert("Упс, что-то пошло не так!");
+      alert('Упс, что-то пошло не так!');
       state.preloader = false;
     });
     builder.addCase(getWorkShopsGorSale.pending, (state, action) => {
@@ -600,7 +600,7 @@ const requestSlice = createSlice({
     });
     builder.addCase(createInvoiceTT.rejected, (state, action) => {
       state.error = action.payload;
-      alert("Упс, что-то пошло не так! Не удалось создать накладную");
+      alert('Упс, что-то пошло не так! Не удалось создать накладную');
       state.preloader = false;
     });
     builder.addCase(createInvoiceTT.pending, (state, action) => {
@@ -611,7 +611,7 @@ const requestSlice = createSlice({
     builder.addCase(endSaleProds.fulfilled, (state, action) => {
       state.preloader = false;
       if (action.payload === 1) {
-        alert("Успешно продано!");
+        alert('Успешно продано!');
       }
     });
     builder.addCase(endSaleProds.rejected, (state, action) => {
@@ -629,7 +629,7 @@ const requestSlice = createSlice({
     });
     builder.addCase(getBonusCard.rejected, (state, action) => {
       state.error = action.payload;
-      alert("Упс, что-то пошло не так! Не удалось отсканировать карту");
+      alert('Упс, что-то пошло не так! Не удалось отсканировать карту');
       state.preloader = false;
     });
     builder.addCase(getBonusCard.pending, (state, action) => {
@@ -685,7 +685,7 @@ const requestSlice = createSlice({
     builder.addCase(getMyLeftovers.rejected, (state, action) => {
       state.error = action.payload;
       // state.preloader = false;
-      alert("Упс, что-то пошло не так! Не удалось загрузить данные");
+      alert('Упс, что-то пошло не так! Не удалось загрузить данные');
     });
     builder.addCase(getMyLeftovers.pending, (state, action) => {
       // state.preloader = true;
@@ -698,20 +698,20 @@ const requestSlice = createSlice({
       /// 2 - Введенное количество товара больше доступного количества.
       state.preloader = false;
       +action.payload.result == 1
-        ? alert("Товар продан!")
+        ? alert('Товар продан!')
         : alert(
-            "Ошибка!",
+            'Ошибка!',
             `${
               +action.payload?.count_type == 1
-                ? "Введенное количество товара больше доступного вам количества."
-                : "Введенная сумма товара больше доступного вам количества."
+                ? 'Введенное количество товара больше доступного вам количества.'
+                : 'Введенная сумма товара больше доступного вам количества.'
             } `
           );
     });
     builder.addCase(addProductInvoiceTT.rejected, (state, action) => {
       state.error = action.payload;
       state.preloader = false;
-      alert("Упс, что-то пошло не так! Не удалось продать товар!");
+      alert('Упс, что-то пошло не так! Не удалось продать товар!');
       // alert(
       //   "Ошибка!",
       // `${
@@ -736,13 +736,13 @@ const requestSlice = createSlice({
       const { result } = action.payload;
 
       if (result == 1 || result == 0) {
-        alert("Карта была успешно привязана");
+        alert('Карта была успешно привязана');
       } else if (result == -1) {
-        alert("Неверный номер карты");
+        alert('Неверный номер карты');
       } else if (result == -2) {
-        alert("Данная карта занята другим пользователем");
+        alert('Данная карта занята другим пользователем');
       } else if (result == -3) {
-        alert("Клиент с таким номером уже существует!");
+        alert('Клиент с таким номером уже существует!');
       }
     });
     builder.addCase(TieCardWithUser.rejected, (state, action) => {
@@ -805,7 +805,7 @@ const requestSlice = createSlice({
     builder.addCase(deleteSoldProd.rejected, (state, action) => {
       state.error = action.payload;
       state.preloader = false;
-      alert("Упс, что-то пошло не так! Не удалось удалить...");
+      alert('Упс, что-то пошло не так! Не удалось удалить...');
     });
     builder.addCase(deleteSoldProd.pending, (state, action) => {
       state.preloader = true;
@@ -847,15 +847,15 @@ const requestSlice = createSlice({
     builder.addCase(acceptInvoiceReturn.fulfilled, (state, action) => {
       state.preloader = false;
       if (action.payload == 1) {
-        alert("Возврат успешно оформлен");
+        alert('Возврат успешно оформлен');
       } else {
-        alert("Не удалось оформить накладную для возврата");
+        alert('Не удалось оформить накладную для возврата');
       }
     });
     builder.addCase(acceptInvoiceReturn.rejected, (state, action) => {
       state.error = action.payload;
       alert(
-        "Упс, что-то пошло не так! Не удалось оформить накладную для возврата"
+        'Упс, что-то пошло не так! Не удалось оформить накладную для возврата'
       );
       state.preloader = false;
     });

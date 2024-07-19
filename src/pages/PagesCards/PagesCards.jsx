@@ -1,15 +1,21 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import ScannerAddBonusPage from "./ScannerAddBonusPage/ScannerAddBonusPage";
-import AddBonusPage from "./AddBonusPage/AddBonusPage";
-import AddCardScreen from "./AddCardPage/AddCardPage";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import ScannerAddBonusPage from './ScannerAddBonusPage/ScannerAddBonusPage';
+import AddBonusPage from './AddBonusPage/AddBonusPage';
+import AddCardPage from './AddCardPage/AddCardPage';
+import ScannerCardPage from './ScannerCardPage/ScannerCardPage';
 
 const PagesCards = () => {
   return (
     <Routes>
       <Route path="/" element={<PagesCards />} />
+      <Route path="/add" element={<AddCardPage />} />
+      {/* добавление карты */}
+      <Route path="/accept_reg" element={<ScannerCardPage />} />
+      {/* сканирование карты для привязки клиента */}
+
       <Route path="/add_bonus" element={<ScannerAddBonusPage />} />
-      <Route path="/add" element={<AddCardScreen />} />
+      <Route path="/add_bonus_sale" element={<AddBonusPage />} />
     </Routes>
   );
 };

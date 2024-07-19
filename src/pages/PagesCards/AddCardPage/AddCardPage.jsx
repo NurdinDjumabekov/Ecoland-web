@@ -1,53 +1,52 @@
 /////// style
-import "./style.scss";
+import './style.scss';
 
 /////// hooks
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 //////// components
-import InputMask from "react-input-mask";
+import InputMask from 'react-input-mask';
 
 /////// helpers
-import { checNumInput, checkNumUser } from "../../../helpers/Data";
-import { transformNumber } from "../../../helpers/transformNumber";
+import { checkNumUser } from '../../../helpers/Data';
+import { transformNumber } from '../../../helpers/transformNumber';
 
 /////// img
-import camera from "../../../assets/images/camera.png";
+import camera from '../../../assets/images/camera.png';
 
 ////// fns
-import { TieCardWithUser } from "../../../store/reducers/requestSlice";
-import { dataCardFN } from "../../../store/reducers/stateSlice";
-import NavMenu from "../../../common/NavMenu/NavMenu";
-import { useLocation, useNavigate } from "react-router-dom";
+import { TieCardWithUser } from '../../../store/reducers/requestSlice';
+import { dataCardFN } from '../../../store/reducers/stateSlice';
+import NavMenu from '../../../common/NavMenu/NavMenu';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const AddCardScreen = () => {
+const AddCardPage = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
 
   const { dataCard } = useSelector((state) => state.stateSlice);
 
   useEffect(() => {
-    dispatch(dataCardFN({ fio: "", phone: "", card: "" }));
+    dispatch(dataCardFN({ fio: '', phone: '', card: '' }));
   }, []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
 
-    const sanitizedText = value?.replace(/[.,]/g, "");
+    const sanitizedText = value?.replace(/[.,]/g, '');
     dispatch(dataCardFN({ ...dataCard, [name]: sanitizedText }));
   };
 
-  const openCameraQrCard = () => navigate("ScannerCardScreen");
+  const openCameraQrCard = () => navigate('/card/accept_reg');
 
   const sendData = () => {
     if (dataCard.fio?.length < 5) {
-      alert("Введите ФИО клиента");
+      alert('Введите ФИО клиента');
     } else if (!checkNumUser.test(dataCard?.phone)) {
-      alert("Введите корректный номер телефона клиента");
+      alert('Введите корректный номер телефона клиента');
     } else if (dataCard.card?.length !== 9) {
-      alert("Введите корректный номер карты");
+      alert('Введите корректный номер карты');
     } else {
       const dataSend = {
         ...dataCard,
@@ -59,7 +58,7 @@ const AddCardScreen = () => {
 
   return (
     <>
-      <NavMenu navText={"Добавление карты"} />
+      <NavMenu navText={'Добавление карты'} />
       <div className="addCardInfo">
         <div className="inputBlock">
           <p className="inputTitle">Введите ФИО клиента</p>
@@ -78,7 +77,7 @@ const AddCardScreen = () => {
             value={dataCard?.phone}
             onChange={onChange}
             name="phone"
-            mask={"+999(999)-99-99-99"}
+            mask={'+999(999)-99-99-99'}
           />
         </div>
         <div className="inputBlock">
@@ -104,4 +103,4 @@ const AddCardScreen = () => {
   );
 };
 
-export default AddCardScreen;
+export default AddCardPage;
