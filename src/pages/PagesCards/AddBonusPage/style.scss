@@ -1,0 +1,84 @@
+.addCard {
+    padding: 10px;
+    flex: 1;
+    
+    .inputBlock {
+      margin-top: 20px;
+    }
+    
+    .inputTitle {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 19px;
+      color: #000;
+      margin-bottom: 8px;
+    }
+    
+    .inputFio {
+      padding: 0 10px;
+      height: 50px;
+      width: 100%;
+      border-color: rgb(217, 223, 232);
+      border-radius: 4px;
+      background-color: #fff;
+      font-size: 16px;
+      font-weight: 400;
+      color: #000;
+    }
+    
+    .numQrCode {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .inputFioQR {
+      padding: 0 10px;
+      height: 50px;
+      width: 100%;
+      border-color: rgb(217, 223, 232);
+      border-radius: 4px;
+      background-color: #fff;
+      font-size: 16px;
+      font-weight: 400;
+      color: #000;
+    }
+    
+    .btnOpenQR {
+      height: 50px;
+      width: 65px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #222;
+    }
+    
+    .btnImgQR {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .addCardBtn {
+      background-color: rgba(12, 169, 70, 0.9);
+      color: #fff;
+      font-weight: 700;
+      font-size: 17px;
+      position: absolute;
+      bottom: 30px;
+      min-width: 98%;
+      align-self: center;
+    }
+    
+    .green {
+      color: green;
+      font-weight: 500;
+    }
+    
+    .blue {
+      color: rgba(97, 112, 188, 0.972);
+      font-weight: 500;
+    }
+    
+  }

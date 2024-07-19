@@ -1,0 +1,129 @@
+.parentCounter {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: 410px) {
+        width: 370px;
+        @media screen and (max-width: 385px) {
+            width: 350px;
+            @media screen and (max-width: 370px) {
+                width: 330px;
+            }
+        }
+    }
+
+    .leftovers {
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(47, 71, 190, 0.591);
+      margin: 5px 0px;
+    }
+    
+    .child {
+      padding: 15px;
+      padding-top: 20px;
+      padding-bottom: 15px;
+      border-radius: 5px;
+      background-color: #ebeef2;
+      position: relative;
+      min-width: 90%;
+     
+    }
+    
+    .title {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      max-width: 85%;
+    }
+    
+    .addDataBlock {
+      width: 100%;
+      align-self: center;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin: 40px 0px 20px;
+    }
+    
+    .inputTitle {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 15px;
+      color: #222;
+      margin-bottom: 5px;
+      padding-left: 2px;
+    }
+    
+    .inputBlock {
+      width: 48%;
+      min-width: 48%;
+      input {
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 40px;
+        border-radius: 8px;
+        border-color: rgb(217, 223, 232);
+        background-color: #fff;
+        max-width: 100%;
+        margin: 5px 0 0 0;
+        border: none;
+        font-size: 16px;
+        &::placeholder {
+            color: #222;
+        }
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+      }
+    }
+    
+    
+    .btnAdd {
+      color: #fff;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      border-radius: 8px;
+      font-weight: 600;
+      border-width: 1px;
+      border-color: rgb(217, 223, 232);
+      font-size: 18px;
+      margin-top: 10px;
+      background-color: rgba(97, 100, 239, 0.7);
+      width: 45%;
+      margin-bottom: 0;
+      height: 40px;
+
+    }
+    
+    .krest {
+      width: 22px;
+      height: 22px;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      position: absolute;
+      right: 0;
+      top: 20px;
+    }
+    
+    .line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: red;
+    }
+    
+    .deg {
+      transform: rotate(45deg);
+    }
+    
+    .degMinus {
+      transform: rotate(-45deg);
+    }
+  }
+  

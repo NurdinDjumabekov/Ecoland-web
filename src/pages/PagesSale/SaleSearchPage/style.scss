@@ -1,0 +1,63 @@
+.containerSearch {
+    min-height: 100vh;
+    background-color: #fff;
+
+    &__inner {
+      flex: 1;
+      position: relative;
+      background-color: rgba(162, 178, 238, 0.102);
+    }
+    
+    .blockSelectProd {
+      flex: 1;
+      padding-bottom: 10px;
+    }
+    
+    .arrowSearch {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px;
+      padding-top: 14px;
+      padding-bottom: 16px;
+      background-color: rgba(12, 169, 70, 0.486);
+      margin-bottom: 0;
+      min-width: 100%;
+    }
+    
+    .arrowInner {
+      border-top: 3px solid #fff;
+      border-right: 3px solid #fff;
+      height: 15px;
+      width: 15px;
+      border-radius: 3px;
+      transform: rotate(45deg);
+      margin-right: 20px;
+      margin-top: 5px;
+    }
+    
+    .textBtn {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+    }
+    
+    
+    .searchBlock {
+      height: 45px;
+      width: 90%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 0;
+      margin-right: -20px;
+    }
+    
+    .iconSearch {
+      width: 30px;
+      height: 30px;
+    }
+    
+  }
+  

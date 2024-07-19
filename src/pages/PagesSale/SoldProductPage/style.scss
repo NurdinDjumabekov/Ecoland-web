@@ -1,0 +1,145 @@
+.soldBlock {
+    min-height: 100vh;
+    padding-bottom: 100px;
+
+    .container {
+      background: rgba(162, 178, 238, 0.102);
+      min-width: 100%;
+      padding: 8px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(47, 71, 190, 0.287);
+    }
+    
+    .parentBlock {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0;
+      position: relative;
+    }
+    
+    .titleNum {
+      font-size: 19px;
+      font-weight: 700;
+      color: rgba(47, 71, 190, 0.672);
+      border: 1px solid rgba(47, 71, 190, 0.672);
+      background-color: #d4dfee;
+      padding: 3px 0 3px 7px;
+      border-radius: 5px;
+    }
+    
+    .titleDate {
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 5px;
+      line-height: 16px;
+      color: rgba(47, 71, 190, 0.672);
+    }
+    
+    .title {
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 5px;
+      line-height: 17px;
+      color: #222;
+      margin-top: 10px;
+    }
+    
+    .price {
+      font-size: 15px;
+      font-weight: 400;
+    }
+    
+    .totalPrice {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(12, 169, 70, 0.9);
+    }
+    
+    .mainData {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    
+    .flatList {
+      width: 100%;
+      padding-top: 8px;
+    }
+    
+    .actionBlock {
+      position: fixed;
+      bottom: 0px;
+      padding: 10px 10px 40px;
+      left: 50%;
+      min-width: 100%;
+      transform: translateX(-50%);
+      background: #fff;
+      border-top: 1px solid rgba(47, 71, 190, 0.691);
+    }
+    
+    .actionBlockInner {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0 0 0;
+      gap: 10px;
+
+    }
+    
+    .resultFio {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      color: rgba(47, 71, 190, 0.691);
+    }
+    
+    .result {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      color: rgba(12, 169, 70, 0.9);
+      margin-top: 5px;
+    }
+    
+    .resultDiscount {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      color: red;
+      margin-top: 5px;
+    }
+    
+    .resultAll {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 20px;
+      color: rgba(47, 71, 190, 0.691);
+      margin-top: 7px;
+      margin-bottom: 5px;
+      text-decoration: underline;
+    }
+    
+    .endSaleBtn {
+      background-color: rgba(12, 169, 70, 0.9);
+      color: #fff;
+      width: 47%;
+      font-size: 15px;
+      height: 45px;
+      border-radius: 5px;
+    }
+    
+    .addCard {
+      background-color: rgba(47, 71, 190, 0.691);
+      color: #fff;
+      width: 47%;
+      font-size: 16px;
+      height: 45px;
+      border-radius: 5px;
+    }
+  }
+  

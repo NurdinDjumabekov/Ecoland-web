@@ -1,0 +1,46 @@
+.mainReturn {
+    flex: 1;
+
+    .containerReturn {
+        background-color: #fff;
+        min-width: 100%;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        border-radius: 8px;
+        padding-top: 5px;
+    }
+    
+    .total {
+        border-top: 1px solid #222;
+        padding-top: 8px;
+    }
+    
+    .totalItemCount {
+        font-size: 18px;
+        font-weight: 500;
+        color: rgba(47, 71, 190, 0.991);
+        padding: 5px 0px;
+        margin: 0 10px;
+    }
+    
+    .actionBlock {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 10px;
+    }
+    
+    .sendReturnProd {
+        background-color: rgba(12, 169, 70, 0.9);
+        color: #fff;
+        display: block;
+        width: 96%;
+        align-self: center;
+        font-size: 17px;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 5px auto 0px;
+
+    }
+}
