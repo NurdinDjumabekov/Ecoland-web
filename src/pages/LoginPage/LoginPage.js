@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 ////// fns
-import { changeDataLogin, clearLogin } from "../../store/reducers/stateSlice";
-import { logInAccount } from "../../store/reducers/requestSlice";
+import { changeDataLogin, clearLogin } from '../../store/reducers/stateSlice';
+import { logInAccount } from '../../store/reducers/requestSlice';
 
 ////imgs
-import logoImg from "../../assets/images/logoEcoMini.png";
-import "./style.scss";
+import logoImg from '../../assets/images/logoEcoMini.png';
+import './style.scss';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -29,16 +29,17 @@ const LoginPage = () => {
     if (dataLogin?.login && dataLogin?.password) {
       dispatch(logInAccount({ dataLogin, navigate, data }));
     } else {
-      alert("Введите логин и пароль!");
+      alert('Введите логин и пароль!');
     }
   };
 
   const handleFocus = (e) => {
-    e.target.scrollIntoView({ behavior: "smooth", block: "center" });
+    e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   useEffect(() => {
     dispatch(clearLogin());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [dispatch]);
 
   return (
@@ -52,7 +53,7 @@ const LoginPage = () => {
           ref={loginRef}
           value={dataLogin?.login}
           onChange={onChange}
-          placeholder={"Ваш логин"}
+          placeholder={'Ваш логин'}
           onFocus={handleFocus}
           name="login"
           className="input"
@@ -66,7 +67,7 @@ const LoginPage = () => {
           ref={passwordRef}
           value={dataLogin?.password}
           onChange={onChange}
-          placeholder={"Ваш пароль"}
+          placeholder={'Ваш пароль'}
           onFocus={handleFocus}
           name="password"
           type="password"

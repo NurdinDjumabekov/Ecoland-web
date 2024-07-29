@@ -28,8 +28,10 @@ const ScannerSalePage = () => {
   const errorText = "Произошла ошибка, попробуйте перезагрузить сайт";
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     setStart(true);
-    const config = { fps: 10, qrbox: { width: 200, height: 200 } };
+    const config = { fps: 10, qrbox: { width: 220, height: 200 } };
     const html5QrCode = new Html5Qrcode("qrCodeContainer");
 
     const qrScanerStop = () => {

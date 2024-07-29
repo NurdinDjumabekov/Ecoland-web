@@ -1,15 +1,15 @@
 ///hooks
-import React from "react";
-import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 /////components
-import { EveryProduct } from "../../../components/SaleProd/EveryProduct/EveryProduct";
-import NavMenu from "../../../common/NavMenu/NavMenu";
-import { SearchProdsSale } from "../../../components/SaleProd/SearchProdsSale/SearchProdsSale";
+import { EveryProduct } from '../../../components/SaleProd/EveryProduct/EveryProduct';
+import NavMenu from '../../../common/NavMenu/NavMenu';
+import { SearchProdsSale } from '../../../components/SaleProd/SearchProdsSale/SearchProdsSale';
 
 ////style
-import "./style.scss";
+import './style.scss';
 
 const SaleSearchPage = () => {
   const location = useLocation();
@@ -22,8 +22,12 @@ const SaleSearchPage = () => {
   const emptyDataProd = listProdSearch?.length === 0;
 
   const listProdSale = () => {
-    navigate("/sale/sold_prod", { state: { invoice_guid } });
+    navigate('/sale/sold_prod', { state: { invoice_guid } });
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <>

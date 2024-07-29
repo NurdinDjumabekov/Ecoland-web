@@ -1,118 +1,117 @@
 .containerHistorySold {
-    min-height: 90vh;
+  min-height: 90vh;
 
-    .historyParent {
-      min-width: 100%;
-      width: 100%;
-      padding-bottom: 0;
-      border-top: 1px solid  rgba(47, 71, 190, 0.587);
-      height: 83%;
-      margin: 3px 0 200px 0;
-    }
-    
-    .more {
-      max-height: 88%;
-    }
-    
-    .everyInner {
-      background: rgba(162, 178, 238, 0.102);
-      min-width: 100%;
-      padding: 8px;
-      padding-top: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid  rgba(47, 71, 190, 0.287);
-    }
-    
-    .mainData {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding-right: 10px;
-    }
-    
-    .mainDataInner {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .titleNum {
-      font-size: 19px;
-      font-weight: 700;
-      color: rgba(47, 71, 190, 0.672);
-      border: 1px solid rgba(47, 71, 190, 0.672);
-      background: #d4dfee;
-      padding: 3px 5px 3px 7px;
-      border-radius: 5px;
-    }
-    
-    .sum {
-      font-size: 16px;
-      font-weight: 500;
-      border-radius: 5px;
-      line-height: 17px;
-      color: rgba(47, 71, 190, 0.672);
-    }
-    
-    .title {
-      font-size: 16px;
-      font-weight: 400;
-      margin-top: 5px;
-    }
-    
-    .discount {
-      font-size: 18px;
-      font-weight: 500;
-      color: rgba(227, 16, 51, 0.9);
-      padding: 0px 10px;
-    }
-    
-    .totalItemSumm {
-      font-size: 18px;
-      font-weight: 500;
-      color: rgba(47, 71, 190, 0.991);
-      padding: 0 10px;
-    }
-    
-    .actionBlock {
-      position: fixed;
-      bottom: 0px;
-      left: 0;
-      padding: 20px 0px 50px;
-      border-top: 1px solid rgba(47, 71, 190, 0.691);
-      min-width: 100%;
-      background: #fff;
-    }
-    
-    .actionBlockInner {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 10px 5px;
-    }
-    
-    .endSaleBtn {
-      background-color: rgba(12, 169, 70, 0.9);
-      color: #fff;
-      width: 48%;
-      font-size: 14px;
-      height: 40px;
-      border-radius: 7px;
-    }
-    
-    .addCard {
-      background-color: rgba(47, 71, 190, 0.691);
-      color: #fff;
-      width: 48%;
-      font-size: 14px;
-      height: 40px;
-      border-radius: 7px;
-    }
+  .historyParent {
+    min-width: 100%;
+    width: 100%;
+    padding-bottom: 0;
+    border-top: 1px solid rgba(47, 71, 190, 0.587);
+    height: 83%;
+    margin: 3px 0 200px 0;
   }
-  
-  
+
+  .more {
+    max-height: 88%;
+  }
+
+  .everyInner {
+    background: rgba(162, 178, 238, 0.102);
+    min-width: 100%;
+    padding: 8px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(47, 71, 190, 0.287);
+  }
+
+  .mainData {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-right: 10px;
+  }
+
+  .mainDataInner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .titleNum {
+    font-size: 19px;
+    font-weight: 700;
+    color: rgba(47, 71, 190, 0.672);
+    border: 1px solid rgba(47, 71, 190, 0.672);
+    background: #d4dfee;
+    padding: 3px 5px 3px 7px;
+    border-radius: 5px;
+  }
+
+  .sum {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    line-height: 17px;
+    color: rgba(47, 71, 190, 0.672);
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 5px;
+  }
+
+  .discount {
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(227, 16, 51, 0.9);
+    padding: 0px 10px;
+  }
+
+  .totalItemSumm {
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(47, 71, 190, 0.991);
+    padding: 0 10px;
+  }
+
+  .actionBlock {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    padding: 20px 0px 50px;
+    border-top: 1px solid rgba(47, 71, 190, 0.691);
+    min-width: 100%;
+    background: #fff;
+  }
+
+  .actionBlockInner {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px 5px;
+    gap: 10px;
+  }
+
+  .endSaleBtn {
+    background-color: rgba(12, 169, 70, 0.9);
+    color: #fff;
+    width: 47% !important;
+    font-size: 14px;
+    height: 40px;
+    border-radius: 7px;
+  }
+
+  .addCard {
+    background-color: rgba(47, 71, 190, 0.691);
+    color: #fff;
+    width: 47%;
+    font-size: 14px;
+    height: 40px;
+    border-radius: 7px;
+  }
+}

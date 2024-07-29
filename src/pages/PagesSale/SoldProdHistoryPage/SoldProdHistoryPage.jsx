@@ -29,6 +29,7 @@ const SoldProdHistoryPage = () => {
   const getData = () => dispatch(getListSoldProd(guidInvoice));
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     getData();
   }, [guidInvoice]);
 

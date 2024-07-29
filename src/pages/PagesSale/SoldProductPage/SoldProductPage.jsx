@@ -37,6 +37,7 @@ const SoldProductPage = () => {
 
   useEffect(() => {
     getData();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [invoice_guid]);
 
   const del = (product_guid) => {

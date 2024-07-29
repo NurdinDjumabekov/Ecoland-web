@@ -23,6 +23,7 @@ const MainReturnsPage = () => {
 
   useEffect(() => {
     getData();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   // console.log(listMyInvoiceReturn, "listMyInvoiceReturn");

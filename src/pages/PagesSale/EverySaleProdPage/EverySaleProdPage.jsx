@@ -1,16 +1,16 @@
 ///hooks
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 ////components
-import { getEveryProd } from "../../../store/reducers/requestSlice.js";
-import { addProductInvoiceTT } from "../../../store/reducers/requestSlice.js";
+import { getEveryProd } from '../../../store/reducers/requestSlice.js';
+import { addProductInvoiceTT } from '../../../store/reducers/requestSlice.js';
 
 ////style
-import "./style.scss";
-import Krest from "../../../common/Krest/Krest.jsx";
-import NavMenu from "../../../common/NavMenu/NavMenu.jsx";
+import './style.scss';
+import Krest from '../../../common/Krest/Krest.jsx';
+import NavMenu from '../../../common/NavMenu/NavMenu.jsx';
 
 const EverySaleProdPage = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const EverySaleProdPage = () => {
 
   const refInput = useRef(null);
 
-  const [sum, setSum] = useState("");
+  const [sum, setSum] = useState('');
 
   const { data } = useSelector((state) => state.saveDataSlice);
   const { everyProdSale } = useSelector((state) => state.requestSlice);
@@ -30,7 +30,7 @@ const EverySaleProdPage = () => {
     const text = e.target.value;
     if (/^\d*\.?\d*$/.test(text)) {
       // Проверяем, не является ли точка или запятая первым символом
-      if (text === "." || text?.indexOf(".") === 0) {
+      if (text === '.' || text?.indexOf('.') === 0) {
         return;
       }
       setSum(text);
@@ -38,6 +38,8 @@ const EverySaleProdPage = () => {
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     if (!!obj?.guid) {
       setTimeout(() => {
         refInput?.current?.focus();
@@ -56,10 +58,12 @@ const EverySaleProdPage = () => {
 
   const check_discount = sale_price_discount != 0 || !!sale_price_discount;
 
-  const typeProd = `Введите ${check_unit ? "количество" : "вес"}`;
+  const typeProd = `Введите ${check_unit ? 'количество' : 'вес'}`;
 
-  const addInInvoice = () => {
-    if (sum == "" || sum == 0) {
+  const addInInvoice = (e) => {
+    e.preventDefault();
+
+    if (sum == '' || sum == 0) {
       alert(typeProd);
     } else {
       const { price, sale_price, count_type } = everyProdSale;
@@ -76,20 +80,20 @@ const EverySaleProdPage = () => {
   const onClose = () => navigate(-1);
 
   const typeVes = {
-    1: `Введите ${check_unit ? "итоговое количество" : "итоговый вес"} товара`,
-    2: "Введите итоговую сумму товара",
+    1: `Введите ${check_unit ? 'итоговое количество' : 'итоговый вес'} товара`,
+    2: 'Введите итоговую сумму товара',
   };
 
   return (
     <>
-      <NavMenu navText={"Назад"} />
-      <div className="parenteveryProd">
+      <NavMenu navText={'Назад'} />
+      <form className="parenteveryProd" onSubmit={addInInvoice}>
         <p className="title">{everyProdSale?.product_name}</p>
         <Krest onClick={onClose} />
         <div className="addDataBlock">
           <div className="inputBlock">
             <p className="inputTitle">
-              {check_discount ? "Скидочная цена " : "Цена продажи "}
+              {check_discount ? 'Скидочная цена ' : 'Цена продажи '}
               {everyProdSale?.unit && `за ${everyProdSale?.unit}`}
             </p>
             <div className="inputPrice">
@@ -118,10 +122,10 @@ const EverySaleProdPage = () => {
             />
           </div>
         </div>
-        <button className="btnAdd" onClick={addInInvoice}>
+        <button className="btnAdd" type="submit">
           Продать товар
         </button>
-      </div>
+      </form>
     </>
   );
 };

@@ -1,24 +1,27 @@
 ////// hooks
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 ////// components
-import { AllHistoryInvoice } from '../../../common/AllHistoryInvoice/AllHistoryInvoice';
+import { AllHistoryInvoice } from "../../../common/AllHistoryInvoice/AllHistoryInvoice";
+import NavMenu from "../../../common/NavMenu/NavMenu";
 
 ////// fns
-import { createInvoiceTT } from '../../../store/reducers/requestSlice';
-import { getListSoldInvoice } from '../../../store/reducers/requestSlice';
-import { clearSaleDiscountFN } from '../../../store/reducers/stateSlice';
-import { saleDiscountFN } from '../../../store/reducers/stateSlice';
+import { createInvoiceTT } from "../../../store/reducers/requestSlice";
+import { getListSoldInvoice } from "../../../store/reducers/requestSlice";
+import {
+  clearSaleDiscountFN,
+  dataCardFN,
+} from "../../../store/reducers/stateSlice";
+import { saleDiscountFN } from "../../../store/reducers/stateSlice";
 
 ////// style
-import './style.scss';
+import "./style.scss";
 
 ////// imgs
-import card from '../../../assets/images/card.png';
-import sale from '../../../assets/images/sale.png';
-import { useNavigate } from 'react-router-dom';
-import NavMenu from '../../../common/NavMenu/NavMenu';
+import card from "../../../assets/images/card.png";
+import sale from "../../../assets/images/sale.png";
+import { useNavigate } from "react-router-dom";
 
 const MainSalePage = () => {
   const dispatch = useDispatch();
@@ -30,6 +33,7 @@ const MainSalePage = () => {
   const getData = () => dispatch(getListSoldInvoice(data?.seller_guid));
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     getData();
   }, []);
 
@@ -38,12 +42,16 @@ const MainSalePage = () => {
     //// СОЗДАНИ НАКЛАДНОЙ ДЛЯ ПРОДАЖИ
   };
 
-  const addInfoCards = () => navigate('/card/add');
+  const addInfoCards = () => {
+    navigate("/card/add");
+    dispatch(dataCardFN({ fio: "", phone: "", card: "" }));
+    //// очищаю данные карты
+  };
   //// перенаправляю на страницу добавления карты
 
   return (
     <>
-      <NavMenu navText={'Продажи'} />
+      <NavMenu navText={"Продажи"} />
       <div className="listSoldsProd">
         <div className="saleActionBlock">
           <button className="saleBlock" onClick={saleProd}>
@@ -66,7 +74,7 @@ const MainSalePage = () => {
                   key={item?.guid}
                   item={item}
                   index={index}
-                  keyLink={'/sale/history'}
+                  keyLink={"/sale/history"}
                 />
               ))}
             </>

@@ -33,7 +33,7 @@ const DetailedInvoiceReturnPage = () => {
   const { data } = useSelector((state) => state.saveDataSlice);
 
   const acceptInvoiceFN = () => {
-    ///// для принятия накладной торговой точкой
+    ///// для возврата накладной
     const obj = { seller_guid: data?.seller_guid };
 
     const sendData = { ...obj, listReturn: everyInvoiceReturn, navigate };
@@ -42,6 +42,7 @@ const DetailedInvoiceReturnPage = () => {
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     dispatch(getMyEveryInvoiceReturn(guidInvoice));
   }, [guidInvoice]);
 
